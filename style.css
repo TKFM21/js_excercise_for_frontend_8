@@ -1,0 +1,44 @@
+body {
+    width: 980px;
+    height: 100%;
+    background-color: #dcdcdc;
+    text-align: center;
+    margin: 10px auto;
+}
+
+#question {
+    font-size: 20px;
+}
+
+ul {
+    list-style-type: none;
+}
+
+li {
+    width: 600px;
+    height: 32px;
+    background-color: #e6e6fa;
+    margin: 20px auto;
+    padding-top: 9px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+li:hover {
+    transform: scale(1.2);
+}
+
+button {
+    padding: 4px 10px;
+    width: auto;
+    height: auto;
+    font-size: 24px;
+}
+button:hover {
+    cursor: pointer;
+    border: 2px solid #4196e1;
+}
+
+.js-restart-button {
+    display: none;
+}
