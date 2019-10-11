@@ -5,7 +5,7 @@
   //   - 本サイト : https://opentdb.com/
   //   - 利用するAPI : https://opentdb.com/api.php?amount=10&type=multiple
 
-  const API_URL = 'https://opentdb.com/api.php?amount=10&type=multiple';
+  const API_URL = 'https://opentdb.com/api.php?amount=8&type=multiple';
 
   // 「gameState」オブジェクトを作る
   // - クイズアプリのデータ管理用オブジェクト
@@ -83,7 +83,7 @@
     quizTextP.textContent = '';
     removeAllAnswers();
     
-    if (gameState.currentIndex !== 10) {
+    if (gameState.currentIndex < gameState.quizzes.length) {
       const quiz = gameState.quizzes[gameState.currentIndex];
       makeQuiz(quiz);
       
@@ -101,7 +101,7 @@
   // - 戻り値
   //   - 無し
   const finishQuiz = () => {
-    const result = `${gameState.numberOfCorrects}/10 corrects`;
+    const result = `${gameState.numberOfCorrects}/${gameState.quizzes.length} corrects`;
     resultTextP.textContent = result;
     
     restartBtn.classList.remove('js-restart-button');

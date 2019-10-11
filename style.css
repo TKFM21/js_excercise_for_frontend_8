@@ -6,6 +6,10 @@ body {
     margin: 10px auto;
 }
 
+#question {
+    font-size: 20px;
+}
+
 ul {
     list-style-type: none;
 }
