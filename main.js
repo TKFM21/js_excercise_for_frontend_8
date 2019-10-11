@@ -5,7 +5,7 @@
   //   - 本サイト : https://opentdb.com/
   //   - 利用するAPI : https://opentdb.com/api.php?amount=10&type=multiple
 
-  const API_URL = 'https://opentdb.com/api.php?amount=8&type=multiple';
+  const API_URL = 'https://opentdb.com/api.php?amount=5&type=multiple';
 
   // 「gameState」オブジェクトを作る
   // - クイズアプリのデータ管理用オブジェクト
@@ -59,6 +59,7 @@
     quizTextP.textContent = 'Now Loading....';
     resultTextP.textContent = '';
     restartBtn.classList.add('js-restart-button');
+    
     fetch(API_URL)
       .then(response => response.json())
       .then(data => {
@@ -116,7 +117,7 @@
   //   - 無し
   const removeAllAnswers = () => {
     while(answerContainer.firstChild) {
-      answerContainer.removeChild(answerContainer.firstChild);
+      answerContainer.removeChild( answerContainer.firstChild );
     }
   };
 
@@ -138,14 +139,12 @@
   const makeQuiz = (quiz) => {
     quizTextP.textContent = unescapeHTML(quiz.question);
       
-    const answers = quiz.incorrect_answers;
-    const unescapeCorrectAnswer = unescapeHTML(quiz.correct_answer);
-    answers.push(unescapeCorrectAnswer);
-    const shuffledAnswers = shuffle(answers);
+    const shuffledAnswers = answerChainShuffled(quiz.incorrect_answers, quiz.correct_answer);
     shuffledAnswers.forEach(answer => {
       const liElement = document.createElement('li');
       liElement.textContent = unescapeHTML(answer);
       liElement.addEventListener('click', event => {
+        const unescapeCorrectAnswer = unescapeHTML(quiz.correct_answer);
         gameState.currentIndex++;
         if (event.srcElement.textContent === unescapeCorrectAnswer) {
           alert('Correct Answer!!!!');
@@ -161,6 +160,11 @@
 
   // quizオブジェクトの中にあるcorrect_answer, incorrect_answersを結合して
   // 正解・不正解の解答をシャッフルする。
+  const answerChainShuffled = (incorrect_answers, correct_answer) => {
+    const answers = incorrect_answers;
+    answers.push(correct_answer);
+    return shuffle(answers);
+  };
 
 
   // `shuffle関数` を実装する
@@ -179,7 +183,7 @@
 
     for (let i = cpArray.length - 1; i >= 0; i--){
       // 0~iのランダムな数値を取得
-      let rand = Math.floor( Math.random() * ( i + 1 ) );
+      const rand = Math.floor( Math.random() * ( i + 1 ) );
     
       // 配列の数値を入れ替える
       [cpArray[i], cpArray[rand]] = [cpArray[rand], cpArray[i]];
